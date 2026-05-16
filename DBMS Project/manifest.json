@@ -1,0 +1,21 @@
+{
+  "name": "WE ARE MUSLIM - Premium Attars",
+  "short_name": "WE ARE MUSLIM",
+  "description": "Premium Islamic fragrances and attars with loyalty points and affiliate program",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#8B5E3C",
+  "background_color": "#FDF8F5",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192x192?text=WAM",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512x512?text=WAM",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

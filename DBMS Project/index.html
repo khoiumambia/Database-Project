@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WE ARE MUSLIM | Ultimate Attar Experience</title>
+    <meta name="description" content="Premium Islamic fragrances and attars. Free shipping worldwide. Loyalty points, affiliate program, and more!">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8B5E3C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #8B5E3C;
+            --primary-dark: #6B4423;
+            --primary-light: #C4A27A;
+            --secondary: #2C1810;
+            --accent: #D4AF37;
+            --background: #FDF8F5;
+            --surface: #FFFFFF;
+            --text: #2C1810;
+            --text-light: #6B4423;
+            --border: #E8DDD3;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.8rem 2rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            gap: 0.3rem;
+            margin-left: 1rem;
+        }
+        
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Currency Switcher */
+        .currency-switcher select {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        
+        .cart-icon, .wishlist-icon, .points-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count, .wishlist-count, .points-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: var(--accent);
+            color: var(--secondary);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Hero Carousel */
+        .hero-carousel {
+            position: relative;
+            overflow: hidden;
+            height: 500px;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .carousel-slide.active { opacity: 1; }
+        
+        .carousel-content {
+            background: rgba(0,0,0,0.5);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 600px;
+        }
+        
+        .carousel-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.3);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-btn:hover { background: rgba(255,255,255,0.5); }
+        .carousel-btn.prev { left: 20px; }
+        .carousel-btn.next { right: 20px; }
+        
+        /* Flash Sale Banner */
+        .flash-sale {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .countdown {
+            display: inline-flex;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+        }
+        
+        /* Search Section */
+        .search-section {
+            max-width: 1400px;
+            margin: -30px auto 2rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .search-container {
+            background: var(--surface);
+            border-radius: 60px;
+            padding: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .search-container input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 60px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-item {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Product Grid */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .product-badge.sale { background: var(--danger); color: white; }
+        .product-badge.hot { background: #ef4444; color: white; }
+        
+        .product-actions {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+        
+        .product-actions button {
+            background: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-actions button:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .product-info { padding: 1rem; }
+        .product-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; }
+        .product-price { color: var(--primary); font-size: 1.2rem; font-weight: 700; margin: 0.5rem 0; }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 3rem;
+            border-radius: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 1rem auto 0;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 50px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+        }
+        
+        /* Live Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chat-toggle {
+            background: var(--primary);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .chat-toggle:hover { transform: scale(1.1); }
+        .chat-toggle i { color: white; font-size: 1.5rem; }
+        
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-window.open { display: flex; }
+        
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+        
+        .message {
+            margin: 0.5rem 0;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background: var(--primary-light);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .bot-message { background: var(--border); }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            z-index: 1200;
+            animation: slideIn 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .pulse { animation: pulse 0.5s ease; }
+        
+        @media (max-width: 768px) {
+            .hero-carousel { height: 400px; }
+            .carousel-content h1 { font-size: 1.5rem; }
+            .nav-container { flex-direction: column; }
+            .nav-links { justify-content: center; }
+            .section { padding: 2rem 1rem; }
+            .newsletter-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div>
+            <div class="logo">#WE ARE MUSLIM</div>
+            <div class="logo-sub" style="font-size: 0.7rem; letter-spacing: 2px;">PREMIUM ATTARS & FRAGRANCES</div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="products.html">Products</a>
+            <a href="compare.html">Compare</a>
+            <a href="blog.html">Blog</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="loyalty.html">Loyalty</a>
+            <a href="affiliate.html">Affiliate</a>
+            <a href="order-tracking.html">Track</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('bn')">বাংলা</button>
+                <button class="lang-btn" onclick="changeLanguage('ar')">عربي</button>
+            </div>
+            
+            <!-- Currency Switcher -->
+            <div class="currency-switcher">
+                <select id="currencySelect" onchange="changeCurrency()">
+                    <option value="BDT">৳ BDT</option>
+                    <option value="USD">$ USD</option>
+                    <option value="GBP">£ GBP</option>
+                    <option value="SAR">ر.س SAR</option>
+                </select>
+            </div>
+            
+            <div class="points-icon" onclick="window.location.href='loyalty.html'">
+                <i class="fas fa-star" style="color: var(--accent);"></i>
+                <span class="points-count" id="pointsCount">0</span>
+            </div>
+            <div class="wishlist-icon" onclick="window.location.href='wishlist.html'">
+                <i class="far fa-heart"></i>
+                <span class="wishlist-count" id="wishlistCount">0</span>
+            </div>
+            <div class="cart-icon" onclick="window.location.href='shop.html'">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Flash Sale Banner -->
+<div class="flash-sale" id="flashSale">
+    <i class="fas fa-bolt"></i> FLASH SALE! <span id="saleDiscount">25% OFF</span> on all Oudh Collections! 
+    <div class="countdown" id="countdown"></div>
+</div>
+
+<!-- Hero Carousel -->
+<div class="hero-carousel">
+    <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1594035910387-fea47794261f?w=1200');">
+        <div class="carousel-content">
+            <h1>Premium Oudh Collection</h1>
+            <p>Discover the finest attars crafted with centuries-old traditions</p>
+            <a href="shop.html" class="btn btn-primary">Shop Now →</a>
+        </div>
+    </div>
+    <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=1200');">
+        <div class="carousel-content">
+            <h1>Eid Special Collection</h1>
+            <p>Limited edition fragrances for the blessed occasion</p>
+            <a href="shop.html" class="btn btn-primary">Explore →</a>
+        </div>
+    </div>
+    <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=1200');">
+        <div class="carousel-content">
+            <h1>Free Shipping Worldwide</h1>
+            <p>On orders over ৳2000 | Earn Loyalty Points</p>
+            <a href="shop.html" class="btn btn-primary">Shop Now →</a>
+        </div>
+    </div>
+    <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+    <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+</div>
+
+<!-- Search Section -->
+<div class="search-section">
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for attars by name, brand, or fragrance...">
+        <button class="btn btn-primary" onclick="searchProducts()">Search</button>
+        <button class="btn" onclick="toggleVoiceSearch()" style="background: var(--primary-light);"><i class="fas fa-microphone"></i></button>
+    </div>
+    <div id="voiceSearchStatus" style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-light);"></div>
+</div>
+
+<!-- Features Grid -->
+<div class="section">
+    <div class="features-grid">
+        <div class="feature-item" onclick="window.location.href='loyalty.html'">
+            <i class="fas fa-gem"></i>
+            <h3>Loyalty Points</h3>
+            <p>Earn points, get discounts</p>
+        </div>
+        <div class="feature-item" onclick="window.location.href='affiliate.html'">
+            <i class="fas fa-users"></i>
+            <h3>Affiliate Program</h3>
+            <p>Earn 10% commission</p>
+        </div>
+        <div class="feature-item" onclick="showReferralModal()">
+            <i class="fas fa-gift"></i>
+            <h3>Refer a Friend</h3>
+            <p>Get ৳500 credit</p>
+        </div>
+        <div class="feature-item" onclick="window.location.href='wishlist.html'">
+            <i class="fas fa-heart"></i>
+            <h3>Gift Registry</h3>
+            <p>Create wishlist for events</p>
+        </div>
+        <div class="feature-item" onclick="showGiftWrapModal()">
+            <i class="fas fa-gift"></i>
+            <h3>Gift Wrapping</h3>
+            <p>Personalized message</p>
+        </div>
+        <div class="feature-item" onclick="window.location.href='order-tracking.html'">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Live Tracking</h3>
+            <p>Real-time order tracking</p>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Products -->
+<section class="section">
+    <h2 class="section-title" data-aos="fade-up">⭐ Featured Attars</h2>
+    <div class="product-grid" id="featuredProducts">
+        <div class="loading"><div class="spinner"></div><p>Loading exquisite fragrances...</p></div>
+    </div>
+</section>
+
+<!-- Best Sellers with Affiliate Links -->
+<section class="section">
+    <h2 class="section-title" data-aos="fade-up">🔥 Best Sellers</h2>
+    <div class="product-grid" id="bestSellers">
+        <div class="loading"><div class="spinner"></div><p>Loading best sellers...</p></div>
+    </div>
+</section>
+
+<!-- Seasonal Offers -->
+<section class="section">
+    <div class="newsletter" data-aos="fade-up">
+        <h2>🎁 Ramadan Special Offer</h2>
+        <p>Buy any 2 attars and get 1 FREE + Double loyalty points!</p>
+        <a href="shop.html" class="btn" style="background: white; color: var(--primary); margin-top: 1rem; display: inline-block;">Shop Ramadan Collection →</a>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section class="section">
+    <h2 class="section-title" data-aos="fade-up">📝 Latest from Our Blog</h2>
+    <div class="product-grid" id="blogPosts">
+        <div class="loading"><div class="spinner"></div><p>Loading articles...</p></div>
+    </div>
+</section>
+
+<!-- Newsletter with Discount -->
+<div class="section">
+    <div class="newsletter" data-aos="fade-up">
+        <h2>📧 Subscribe & Get 15% OFF</h2>
+        <p>Plus exclusive offers, early access to sales, and perfume guides!</p>
+        <div class="newsletter-form">
+            <input type="email" id="newsletterEmail" placeholder="Enter your email">
+            <button class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 1rem;">No spam, unsubscribe anytime.</p>
+    </div>
+</div>
+
+<!-- Live Chat Widget -->
+<div class="chat-widget">
+    <div class="chat-toggle" onclick="toggleChat()">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <strong><i class="fas fa-headset"></i> Customer Support</strong>
+            <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 1.2rem;">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">👋 Assalamu Alaikum! Welcome to #WE ARE MUSLIM. How can I help you today?<br><br>💬 Type 'help' to see options:<br>• Track order<br>• Get discount code<br>• Product recommendations<br>• Loyalty points info</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button onclick="sendChatMessage()">Send</button>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div>
+            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.5rem;">#WE ARE MUSLIM</h3>
+            <p>Premium attars crafted with tradition and passion since 2020.</p>
+            <div style="margin-top: 1rem;">
+                <i class="fab fa-facebook" style="margin-right: 1rem;"></i>
+                <i class="fab fa-instagram" style="margin-right: 1rem;"></i>
+                <i class="fab fa-whatsapp" style="margin-right: 1rem;"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+        <div>
+            <h4>Quick Links</h4>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About Us</a>
+            <a href="blog.html">Blog</a>
+            <a href="affiliate.html">Affiliate Program</a>
+            <a href="loyalty.html">Loyalty Program</a>
+        </div>
+        <div>
+            <h4>Customer Service</h4>
+            <a href="order-tracking.html">Track Order</a>
+            <a href="#">Returns & Refunds</a>
+            <a href="#">Shipping Policy</a>
+            <a href="#">FAQ</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div>
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</p>
+            <p><i class="fas fa-phone"></i> +880 1234 567890</p>
+            <p><i class="fas fa-envelope"></i> info@wearemuslim.com</p>
+            <p><i class="fas fa-clock"></i> Sat-Thu: 10AM - 8PM</p>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p>&copy; 2024 #WE ARE MUSLIM. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+    
+    // Global variables
+    let currentLanguage = 'en';
+    let currentCurrency = 'BDT';
+    let exchangeRates = { BDT: 1, USD: 0.0091, GBP: 0.0072, SAR: 0.034 };
+    let products = [];
+    let wishlist = [];
+    let cart = [];
+    let currentSlide = 0;
+    let slides = document.querySelectorAll('.carousel-slide');
+    let speechRecognition = null;
+    
+    // Initialize speech recognition
+    if ('webkitSpeechRecognition' in window) {
+        speechRecognition = new webkitSpeechRecognition();
+        speechRecognition.continuous = false;
+        speechRecognition.interimResults = false;
+        speechRecognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById('searchInput').value = transcript;
+            document.getElementById('voiceSearchStatus').innerHTML = `🎤 Searched: "${transcript}"`;
+            searchProducts();
+            setTimeout(() => {
+                document.getElementById('voiceSearchStatus').innerHTML = '';
+            }, 3000);
+        };
+        speechRecognition.onerror = function() {
+            document.getElementById('voiceSearchStatus').innerHTML = '❌ Voice search failed. Please try again.';
+        };
+    }
+    
+    function toggleVoiceSearch() {
+        if (speechRecognition) {
+            speechRecognition.start();
+            document.getElementById('voiceSearchStatus').innerHTML = '🎤 Listening... Speak now';
+        } else {
+            alert('Voice search is not supported in your browser. Try Chrome!');
+        }
+    }
+    
+    // Load data from localStorage
+    function loadData() {
+        const stored = localStorage.getItem('attar_products');
+        if (stored) {
+            products = JSON.parse(stored);
+        } else {
+            products = [
+                { id: 1, name: "Oudh Royal", brand: "Arabian Oud", fragrance: "Woody Oud", price: 1200, stock: 15, image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", desc: "Premium pure Oudh attar", ratings: 4.8, reviews: 124, isBestSeller: true, isHot: true, salePrice: 900 },
+                { id: 2, name: "Musk Al Mahabba", brand: "Swiss Arabian", fragrance: "Musk", price: 850, stock: 8, image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=300", desc: "Intense musk fragrance", ratings: 4.6, reviews: 89, isBestSeller: true, salePrice: 680 },
+                { id: 3, name: "Rose De Makkah", brand: "Al Haramain", fragrance: "Rose", price: 1500, stock: 3, image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", desc: "Exquisite floral rose attar", ratings: 4.9, reviews: 56, isBestSeller: false },
+                { id: 4, name: "Amber Night", brand: "Rasasi", fragrance: "Amber", price: 2200, stock: 20, image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=300", desc: "Warm amber blend", ratings: 4.7, reviews: 203, isBestSeller: true, isHot: true }
+            ];
+            localStorage.setItem('attar_products', JSON.stringify(products));
+        }
+        
+        wishlist = JSON.parse(localStorage.getItem('attar_wishlist')) || [];
+        cart = JSON.parse(localStorage.getItem('attar_cart')) || [];
+        
+        displayFeatured();
+        displayBestSellers();
+        displayBlogPosts();
+        updateCartCount();
+        updateWishlistCount();
+        updatePointsDisplay();
+        startCountdown();
+    }
+    
+    function displayFeatured() {
+        const featured = products.slice(0, 4);
+        const grid = document.getElementById('featuredProducts');
+        grid.innerHTML = featured.map(p => renderProductCard(p)).join('');
+    }
+    
+    function displayBestSellers() {
+        const bestSellers = products.filter(p => p.isBestSeller).slice(0, 4);
+        const grid = document.getElementById('bestSellers');
+        grid.innerHTML = bestSellers.map(p => renderProductCard(p)).join('');
+    }
+    
+    function renderProductCard(p) {
+        const displayPrice = convertCurrency(p.salePrice || p.price);
+        const originalPrice = p.salePrice ? convertCurrency(p.price) : null;
+        
+        return `
+            <div class="product-card" onclick="viewProduct(${p.id})">
+                ${p.isHot ? '<div class="product-badge hot">🔥 Hot</div>' : ''}
+                ${p.salePrice ? '<div class="product-badge sale">SALE</div>' : ''}
+                <div class="product-actions">
+                    <button onclick="event.stopPropagation(); addToWishlist(${p.id})"><i class="far fa-heart"></i></button>
+                    <button onclick="event.stopPropagation(); addToCompare(${p.id})"><i class="fas fa-chart-line"></i></button>
+                </div>
+                <img class="product-img" src="${p.image}" onerror="this.src='https://via.placeholder.com/300x250?text='+encodeURIComponent(p.name)">
+                <div class="product-info">
+                    <div class="product-title">${p.name}</div>
+                    <div style="font-size: 0.8rem; color: #666;">${p.brand} | ${p.fragrance}</div>
+                    <div class="product-price">
+                        ${displayPrice} ${currentCurrency}
+                        ${originalPrice ? `<span style="font-size: 0.8rem; text-decoration: line-through; color: #999;">${originalPrice}</span>` : ''}
+                    </div>
+                    <div style="font-size: 0.8rem;">⭐ ${p.ratings} (${p.reviews} reviews)</div>
+                    <button class="btn btn-primary" style="width:100%; margin-top: 10px;" onclick="event.stopPropagation(); addToCart(${p.id})">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    function displayBlogPosts() {
+        const blogPosts = [
+            { title: "How to Choose the Perfect Attar", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300", excerpt: "A complete guide to selecting fragrances...", date: "Dec 15, 2024" },
+            { title: "The History of Oudh in Islamic Culture", image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=300", excerpt: "Discover the rich tradition...", date: "Dec 10, 2024" },
+            { title: "Layering Scents: A Beginner's Guide", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300", excerpt: "Create your signature scent...", date: "Dec 5, 2024" }
+        ];
+        
+        const container = document.getElementById('blogPosts');
+        container.innerHTML = blogPosts.map(post => `
+            <div class="product-card" onclick="window.location.href='blog.html'">
+                <img class="product-img" src="${post.image}" style="height: 200px;">
+                <div class="product-info">
+                    <div class="product-title">${post.title}</div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 0.5rem 0;">${post.excerpt}</p>
+                    <small style="color: var(--text-light);">📅 ${post.date}</small>
+                    <button class="btn btn-primary" style="width:100%; margin-top: 10px;">Read More →</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function convertCurrency(amount) {
+        const rate = exchangeRates[currentCurrency];
+        if (currentCurrency === 'BDT') return amount;
+        return Math.round(amount * rate);
+    }
+    
+    function changeCurrency() {
+        currentCurrency = document.getElementById('currencySelect').value;
+        displayFeatured();
+        displayBestSellers();
+        showToast(`Currency changed to ${currentCurrency}`);
+    }
+    
+    function changeLanguage(lang) {
+        currentLanguage = lang;
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        const translations = {
+            en: { welcome: "Welcome", shop: "Shop" },
+            bn: { welcome: "স্বাগতম", shop: "কেনাকাটি" },
+            ar: { welcome: "مرحباً", shop: "تسوق" }
+        };
+        
+        showToast(`Language changed to ${lang.toUpperCase()}`);
+    }
+    
+    function addToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        if (product.stock === 0) {
+            showToast('Sorry, out of stock! Would you like to be notified when back in stock?');
+            return;
+        }
+        
+        let item = cart.find(i => i.id === productId);
+        if (item) {
+            item.quantity++;
+        } else {
+            cart.push({ id: productId, quantity: 1 });
+        }
+        
+        localStorage.setItem('attar_cart', JSON.stringify(cart));
+        updateCartCount();
+        showToast(`${product.name} added to cart! 🛒`);
+        
+        // Earn loyalty points (1 point per 100 TK spent)
+        const pointsEarned = Math.floor(product.price / 100);
+        let points = JSON.parse(localStorage.getItem('loyalty_points')) || 0;
+        points += pointsEarned;
+        localStorage.setItem('loyalty_points', points);
+        updatePointsDisplay();
+    }
+    
+    function addToWishlist(productId) {
+        if (!wishlist.includes(productId)) {
+            wishlist.push(productId);
+            localStorage.setItem('attar_wishlist', JSON.stringify(wishlist));
+            updateWishlistCount();
+            showToast('Added to wishlist! ❤️');
+        } else {
+            showToast('Already in wishlist');
+        }
+    }
+    
+    function addToCompare(productId) {
+        let compareList = JSON.parse(localStorage.getItem('attar_compare')) || [];
+        if (!compareList.includes(productId) && compareList.length < 4) {
+            compareList.push(productId);
+            localStorage.setItem('attar_compare', JSON.stringify(compareList));
+            showToast('Added to compare!');
+        } else if (compareList.length >= 4) {
+            showToast('Can compare up to 4 products only');
+        } else {
+            showToast('Already in compare list');
+        }
+    }
+    
+    function showReferralModal() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) {
+            showToast('Please login to refer friends');
+            window.location.href = 'dashboard.html';
+            return;
+        }
+        
+        const referralCode = user.email.split('@')[0] + Math.floor(Math.random() * 1000);
+        alert(`📢 Referral Program\n\nShare this code with friends: ${referralCode}\n\nWhen they sign up and make their first purchase of ৳1000+, you both get ৳500 credit!\n\nReferral link: https://wearemuslim.com/?ref=${referralCode}`);
+    }
+    
+    function showGiftWrapModal() {
+        alert(`🎁 Gift Wrapping Service\n\nAdd gift wrapping to any order for just ৳50!\n\nIncludes:\n• Premium gift box\n• Handwritten message card\n• Ribbon decoration\n\nSelect "Gift Wrap" at checkout.`);
+    }
+    
+    function searchProducts() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        if (query) {
+            localStorage.setItem('searchQuery', query);
+            window.location.href = 'shop.html';
+        }
+    }
+    
+    function subscribeNewsletter() {
+        const email = document.getElementById('newsletterEmail').value;
+        if (email && email.includes('@')) {
+            let subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers')) || [];
+            if (!subscribers.includes(email)) {
+                subscribers.push(email);
+                localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+                showToast('✓ Subscribed! Check your email for 15% off coupon.');
+                document.getElementById('newsletterEmail').value = '';
+            } else {
+                showToast('Already subscribed!');
+            }
+        } else {
+            showToast('Please enter a valid email');
+        }
+    }
+    
+    function updateCartCount() {
+        const count = cart.reduce((sum, i) => sum + i.quantity, 0);
+        document.getElementById('cartCount').innerText = count;
+    }
+    
+    function updateWishlistCount() {
+        document.getElementById('wishlistCount').innerText = wishlist.length;
+    }
+    
+    function updatePointsDisplay() {
+        const points = localStorage.getItem('loyalty_points') || 0;
+        document.getElementById('pointsCount').innerText = points;
+    }
+    
+    function startCountdown() {
+        const saleEnd = new Date();
+        saleEnd.setDate(saleEnd.getDate() + 3);
+        
+        function updateCountdown() {
+            const now = new Date();
+            const diff = saleEnd - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = 'SALE ENDED!';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (86400000)) / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+            
+            document.getElementById('countdown').innerHTML = `
+                <span class="countdown-item">${days}d</span>
+                <span class="countdown-item">${hours}h</span>
+                <span class="countdown-item">${minutes}m</span>
+                <span class="countdown-item">${seconds}s</span>
+            `;
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+    
+    function changeSlide(direction) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + direction + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+    
+    function viewProduct(id) {
+        localStorage.setItem('viewProductId', id);
+        window.location.href = 'products.html';
+    }
+    
+    // Live Chat
+    function toggleChat() {
+        document.getElementById('chatWindow').classList.toggle('open');
+    }
+    
+    function sendChatMessage() {
+        const input = document.getElementById('chatInput');
+        const message = input.value.trim();
+        if (!message) return;
+        
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.innerHTML += `<div class="message user-message">${escapeHtml(message)}</div>`;
+        input.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        setTimeout(() => {
+            let response = getChatResponse(message.toLowerCase());
+            chatMessages.innerHTML += `<div class="message bot-message">${response}</div>`;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 500);
+    }
+    
+    function getChatResponse(message) {
+        if (message.includes('help') || message === 'help') {
+            return `📋 Here's what I can help with:<br><br>
+            • Track order - Send your order ID<br>
+            • Discount code - Get current offers<br>
+            • Product recommendations - Tell me what you like<br>
+            • Loyalty points - Check your balance<br>
+            • Shipping info - Delivery times<br>
+            • Return policy - 7-day returns<br><br>
+            What would you like to know?`;
+        } else if (message.includes('track') || message.includes('order')) {
+            return `🔍 To track your order, please visit our <a href="order-tracking.html" style="color: var(--primary);">Order Tracking page</a> or send your order ID starting with "ORD".`;
+        } else if (message.includes('discount') || message.includes('coupon')) {
+            return `🎉 Current offers:<br><br>
+            • Use code <strong>WELCOME10</strong> for 10% off first order<br>
+            • Use code <strong>RAMADAN20</strong> for 20% off orders over ৳2000<br>
+            • Free shipping on orders over ৳2000<br>
+            • Double loyalty points this week!`;
+        } else if (message.includes('point') || message.includes('loyalty')) {
+            const points = localStorage.getItem('loyalty_points') || 0;
+            return `⭐ You have <strong>${points}</strong> loyalty points!<br><br>
+            • 100 points = ৳10 discount<br>
+    • Earn 1 point per ৳100 spent<br>
+    • 500 points = Free shipping<br>
+    • 1000 points = 15% off entire order`;
+        } else if (message.includes('shipping')) {
+            return `🚚 Shipping Information:<br><br>
+            • Free shipping on orders ৳2000+<br>
+            • Standard delivery: 3-5 business days<br>
+            • Express delivery: 1-2 business days (৳150)<br>
+            • International shipping: 7-14 days<br><br>
+            Need tracking? Visit our Order Tracking page!`;
+        } else if (message.includes('recommend') || message.includes('suggest')) {
+            return `🌸 Popular recommendations:<br><br>
+            • For daily wear: Musk Al Mahabba (৳850)<br>
+            • For special occasions: Oudh Royal (৳1200)<br>
+            • For gift giving: Amber Night (৳2200)<br>
+            • Best seller: Rose De Makkah (৳1500)<br><br>
+            Browse our <a href="shop.html" style="color: var(--primary);">Shop page</a> for more!`;
+        } else {
+            return `Thank you for your message! 🙏<br><br>Our team will respond within minutes. In the meantime, type 'help' to see what I can assist you with!`;
+        }
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+    
+    // Event listeners
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') searchProducts();
+    });
+    
+    document.getElementById('chatInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendChatMessage();
+    });
+    
+    // Auto carousel
+    setInterval(() => changeSlide(1), 5000);
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    
+    loadData();
+</script>
+</body>
+</html>

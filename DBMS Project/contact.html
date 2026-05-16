@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - WE ARE MUSLIM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #8B5E3C;
+            --primary-dark: #6B4423;
+            --accent: #D4AF37;
+            --background: #FDF8F5;
+            --surface: #FFFFFF;
+            --border: #E8DDD3;
+        }
+        
+        body { font-family: 'Inter', sans-serif; background: var(--background); }
+        
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2C1810;
+            font-weight: 500;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .contact-form {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            width: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.1);
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .map {
+            margin-top: 2rem;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: scale(1.1);
+            background: var(--primary-dark);
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2C1810;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            z-index: 1200;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container { grid-template-columns: 1fr; }
+            .nav-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">#WE ARE MUSLIM</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="products.html">Products</a>
+            <a href="compare.html">Compare</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="order-tracking.html">Track Order</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<div class="contact-container">
+    <div class="contact-info">
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin-bottom: 1rem;">Get in Touch</h2>
+        <p>We'd love to hear from you! Whether you have a question about our attars, need assistance with an order, or just want to say hello.</p>
+        
+        <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+                <strong>Address</strong><br>
+                House #42, Road #12,<br>
+                Banani, Dhaka-1213, Bangladesh
+            </div>
+        </div>
+        
+        <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <div>
+                <strong>Phone</strong><br>
+                +880 1234 567890<br>
+                +880 1987 654321
+            </div>
+        </div>
+        
+        <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+                <strong>Email</strong><br>
+                info@wearemuslim.com<br>
+                support@wearemuslim.com
+            </div>
+        </div>
+        
+        <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <div>
+                <strong>Business Hours</strong><br>
+                Saturday - Thursday: 10:00 AM - 8:00 PM<br>
+                Friday: Closed
+            </div>
+        </div>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d233668.38703692693!2d90.27923710638495!3d23.78057300673883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" 
+                width="100%" height="200" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+    
+    <div class="contact-form">
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin-bottom: 1rem;">Send us a Message</h2>
+        
+        <div class="form-group">
+            <input type="text" id="contactName" placeholder="Your Full Name">
+        </div>
+        <div class="form-group">
+            <input type="email" id="contactEmail" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input type="text" id="contactSubject" placeholder="Subject">
+        </div>
+        <div class="form-group">
+            <textarea id="contactMessage" rows="5" placeholder="Your Message..."></textarea>
+        </div>
+        <button class="btn" onclick="sendMessage()">Send Message</button>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: var(--background); border-radius: 12px;">
+            <p style="font-size: 0.9rem; text-align: center;">
+                <i class="fas fa-lock"></i> Your information is safe with us. We'll respond within 24 hours.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const subject = document.getElementById('contactSubject').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+        
+        if (!name || !email || !message) {
+            showToast('Please fill all required fields');
+            return;
+        }
+        
+        if (!email.includes('@')) {
+            showToast('Please enter a valid email address');
+            return;
+        }
+        
+        // Store message in localStorage for demo
+        let messages = JSON.parse(localStorage.getItem('contact_messages')) || [];
+        messages.push({
+            id: Date.now(),
+            name: name,
+            email: email,
+            subject: subject || 'No subject',
+            message: message,
+            date: new Date().toISOString()
+        });
+        localStorage.setItem('contact_messages', JSON.stringify(messages));
+        
+        showToast(`Thank you ${name}! We'll respond to ${email} within 24 hours.`);
+        
+        // Clear form
+        document.getElementById('contactName').value = '';
+        document.getElementById('contactEmail').value = '';
+        document.getElementById('contactSubject').value = '';
+        document.getElementById('contactMessage').value = '';
+    }
+    
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+</script>
+</body>
+</html>

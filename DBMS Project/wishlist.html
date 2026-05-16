@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - WE ARE MUSLIM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #8B5E3C;
+            --primary-dark: #6B4423;
+            --accent: #D4AF37;
+            --background: #FDF8F5;
+            --surface: #FFFFFF;
+            --border: #E8DDD3;
+            --danger: #ef4444;
+        }
+        
+        body { font-family: 'Inter', sans-serif; background: var(--background); }
+        
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2C1810;
+            font-weight: 500;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .wishlist-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-price {
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .btn {
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .share-wishlist {
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-wishlist {
+            text-align: center;
+            padding: 4rem;
+            background: white;
+            border-radius: 20px;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2C1810;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            z-index: 1200;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">#WE ARE MUSLIM</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="products.html">Products</a>
+            <a href="compare.html">Compare</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="blog.html">Blog</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<div class="wishlist-container">
+    <div class="share-wishlist">
+        <button class="btn" onclick="shareWishlist()" style="width: auto; background: var(--primary); color: white;">
+            <i class="fas fa-share-alt"></i> Share Wishlist
+        </button>
+    </div>
+    <h1 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem;">My Wishlist</h1>
+    <div id="wishlistGrid" class="product-grid"></div>
+</div>
+
+<script>
+    let wishlist = [];
+    let products = [];
+    
+    function loadData() {
+        products = JSON.parse(localStorage.getItem('attar_products')) || [];
+        wishlist = JSON.parse(localStorage.getItem('attar_wishlist')) || [];
+        displayWishlist();
+    }
+    
+    function displayWishlist() {
+        const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+        const grid = document.getElementById('wishlistGrid');
+        
+        if (wishlistProducts.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-wishlist">
+                    <i class="far fa-heart" style="font-size: 4rem; color: var(--primary);"></i>
+                    <h2 style="margin: 1rem 0;">Your wishlist is empty</h2>
+                    <p>Save your favorite items here for later!</p>
+                    <button class="btn btn-primary" onclick="window.location.href='shop.html'" style="width: auto; margin-top: 1rem; padding: 0.8rem 2rem;">Start Shopping →</button>
+                </div>
+            `;
+            return;
+        }
+        
+        grid.innerHTML = wishlistProducts.map(p => `
+            <div class="product-card">
+                <img class="product-img" src="${p.image}" onerror="this.src='https://via.placeholder.com/300x250?text='+encodeURIComponent(p.name)">
+                <div class="product-info">
+                    <h3 style="font-family: 'Cormorant Garamond';">${p.name}</h3>
+                    <p style="color: #666;">${p.brand} | ${p.fragrance}</p>
+                    <div class="product-price">৳${p.price.toLocaleString()}</div>
+                    <p style="font-size: 0.8rem; margin: 0.5rem 0;">${p.stock > 0 ? '✓ In Stock' : '✗ Out of Stock'}</p>
+                    <button class="btn btn-primary" onclick="moveToCart(${p.id})">
+                        <i class="fas fa-shopping-cart"></i> Move to Cart
+                    </button>
+                    <button class="btn btn-danger" onclick="removeFromWishlist(${p.id})">
+                        <i class="far fa-trash-alt"></i> Remove
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function moveToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        if (product.stock === 0) {
+            showToast('Sorry, this product is out of stock!');
+            return;
+        }
+        
+        let cart = JSON.parse(localStorage.getItem('attar_cart')) || [];
+        let item = cart.find(i => i.id === productId);
+        if (item) {
+            item.quantity++;
+        } else {
+            cart.push({ id: productId, quantity: 1 });
+        }
+        localStorage.setItem('attar_cart', JSON.stringify(cart));
+        
+        // Remove from wishlist
+        wishlist = wishlist.filter(id => id !== productId);
+        localStorage.setItem('attar_wishlist', JSON.stringify(wishlist));
+        
+        displayWishlist();
+        showToast(`${product.name} moved to cart!`);
+        
+        // Update cart count
+        const cartCount = cart.reduce((sum, i) => sum + i.quantity, 0);
+        localStorage.setItem('cartCount', cartCount);
+    }
+    
+    function removeFromWishlist(productId) {
+        const product = products.find(p => p.id === productId);
+        wishlist = wishlist.filter(id => id !== productId);
+        localStorage.setItem('attar_wishlist', JSON.stringify(wishlist));
+        displayWishlist();
+        showToast(`${product?.name} removed from wishlist`);
+    }
+    
+    function shareWishlist() {
+        const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+        const productNames = wishlistProducts.map(p => p.name).join(', ');
+        const shareText = `Check out my wishlist at WE ARE MUSLIM! I'm interested in: ${productNames}`;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: 'My Wishlist - WE ARE MUSLIM',
+                text: shareText,
+                url: window.location.href
+            });
+        } else {
+            prompt('Share this wishlist link:', window.location.href);
+        }
+    }
+    
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+    
+    loadData();
+</script>
+</body>
+</html>

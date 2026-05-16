@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings - WE ARE MUSLIM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #8B5E3C;
+            --primary-dark: #6B4423;
+            --accent: #D4AF37;
+            --background: #FDF8F5;
+            --surface: #FFFFFF;
+            --border: #E8DDD3;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body { font-family: 'Inter', sans-serif; background: var(--background); }
+        
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2C1810;
+            font-weight: 500;
+        }
+        
+        .admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .settings-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-family: inherit;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2C1810;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            z-index: 1200;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">#WE ARE MUSLIM</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="products.html">Products</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin-settings.html" style="color: var(--primary);">Admin</a>
+        </div>
+    </div>
+</nav>
+
+<div class="admin-container">
+    <div class="settings-card">
+        <h2>⚙️ General Settings</h2>
+        <div class="form-group">
+            <label>Store Name</label>
+            <input type="text" id="storeName" value="#WE ARE MUSLIM">
+        </div>
+        <div class="form-group">
+            <label>Store Email</label>
+            <input type="email" id="storeEmail" value="info@wearemuslim.com">
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" id="storePhone" value="+880 1234 567890">
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <textarea id="storeAddress" rows="2">House #42, Road #12, Banani, Dhaka-1213, Bangladesh</textarea>
+        </div>
+        <button class="btn btn-primary" onclick="saveGeneralSettings()">Save Settings</button>
+    </div>
+    
+    <div class="settings-card">
+        <h2>💰 Payment Settings</h2>
+        <div class="form-group">
+            <label>bKash Number</label>
+            <input type="text" id="bkashNumber" placeholder="01XXXXXXXXX">
+        </div>
+        <div class="form-group">
+            <label>Nagad Number</label>
+            <input type="text" id="nagadNumber" placeholder="01XXXXXXXXX">
+        </div>
+        <div class="form-group">
+            <label>Rocket Number</label>
+            <input type="text" id="rocketNumber" placeholder="01XXXXXXXXX">
+        </div>
+        <div class="form-group">
+            <label>Bank Account Details</label>
+            <textarea id="bankDetails" rows="3" placeholder="Bank Name, Account Number, Routing Number"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="savePaymentSettings()">Save Payment Settings</button>
+    </div>
+    
+    <div class="settings-card">
+        <h2>📧 Email/SMTP Settings</h2>
+        <div class="form-group">
+            <label>SMTP Host</label>
+            <input type="text" id="smtpHost" placeholder="smtp.gmail.com">
+        </div>
+        <div class="form-group">
+            <label>SMTP Port</label>
+            <input type="text" id="smtpPort" value="587">
+        </div>
+        <div class="form-group">
+            <label>SMTP Username</label>
+            <input type="email" id="smtpUser" placeholder="your-email@gmail.com">
+        </div>
+        <div class="form-group">
+            <label>SMTP Password</label>
+            <input type="password" id="smtpPass" placeholder="********">
+        </div>
+        <button class="btn btn-primary" onclick="saveEmailSettings()">Save Email Settings</button>
+    </div>
+    
+    <div class="settings-card">
+        <h2>🎨 Appearance</h2>
+        <div class="form-group">
+            <label>Primary Color</label>
+            <input type="color" id="primaryColor" value="#8B5E3C">
+        </div>
+        <div class="form-group">
+            <label>Accent Color</label>
+            <input type="color" id="accentColor" value="#D4AF37">
+        </div>
+        <div class="form-group">
+            <label>Background Color</label>
+            <input type="color" id="bgColor" value="#FDF8F5">
+        </div>
+        <button class="btn btn-primary" onclick="saveAppearanceSettings()">Save Appearance</button>
+    </div>
+    
+    <div class="settings-card">
+        <h2>🗑️ Danger Zone</h2>
+        <button class="btn btn-danger" onclick="clearAllData()">Clear All Data (Reset Store)</button>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #666;">⚠️ This will delete all products, orders, and user data. This action cannot be undone.</p>
+    </div>
+</div>
+
+<script>
+    function saveGeneralSettings() {
+        const settings = {
+            storeName: document.getElementById('storeName').value,
+            storeEmail: document.getElementById('storeEmail').value,
+            storePhone: document.getElementById('storePhone').value,
+            storeAddress: document.getElementById('storeAddress').value
+        };
+        localStorage.setItem('store_settings', JSON.stringify(settings));
+        showToast('✅ General settings saved!');
+    }
+    
+    function savePaymentSettings() {
+        const payment = {
+            bkash: document.getElementById('bkashNumber').value,
+            nagad: document.getElementById('nagadNumber').value,
+            rocket: document.getElementById('rocketNumber').value,
+            bank: document.getElementById('bankDetails').value
+        };
+        localStorage.setItem('payment_settings', JSON.stringify(payment));
+        showToast('✅ Payment settings saved!');
+    }
+    
+    function saveEmailSettings() {
+        const emailSettings = {
+            host: document.getElementById('smtpHost').value,
+            port: document.getElementById('smtpPort').value,
+            user: document.getElementById('smtpUser').value,
+            pass: document.getElementById('smtpPass').value
+        };
+        localStorage.setItem('email_settings', JSON.stringify(emailSettings));
+        showToast('✅ Email settings saved!');
+    }
+    
+    function saveAppearanceSettings() {
+        const colors = {
+            primary: document.getElementById('primaryColor').value,
+            accent: document.getElementById('accentColor').value,
+            background: document.getElementById('bgColor').value
+        };
+        localStorage.setItem('appearance_settings', JSON.stringify(colors));
+        
+        // Apply colors immediately
+        document.documentElement.style.setProperty('--primary', colors.primary);
+        document.documentElement.style.setProperty('--accent', colors.accent);
+        document.documentElement.style.setProperty('--background', colors.background);
+        
+        showToast('✅ Appearance settings saved!');
+    }
+    
+    function clearAllData() {
+        if (confirm('⚠️ WARNING: This will delete ALL data including products, orders, users, and settings. This cannot be undone. Are you absolutely sure?')) {
+            if (confirm('LAST WARNING: Type "DELETE" to confirm')) {
+                const confirmation = prompt('Type "DELETE" to confirm reset:');
+                if (confirmation === 'DELETE') {
+                    localStorage.clear();
+                    showToast('🗑️ All data cleared! The page will now reload.');
+                    setTimeout(() => location.reload(), 2000);
+                }
+            }
+        }
+    }
+    
+    function loadSettings() {
+        const store = JSON.parse(localStorage.getItem('store_settings')) || {};
+        if (store.storeName) document.getElementById('storeName').value = store.storeName;
+        if (store.storeEmail) document.getElementById('storeEmail').value = store.storeEmail;
+        if (store.storePhone) document.getElementById('storePhone').value = store.storePhone;
+        if (store.storeAddress) document.getElementById('storeAddress').value = store.storeAddress;
+        
+        const payment = JSON.parse(localStorage.getItem('payment_settings')) || {};
+        if (payment.bkash) document.getElementById('bkashNumber').value = payment.bkash;
+        if (payment.nagad) document.getElementById('nagadNumber').value = payment.nagad;
+        if (payment.rocket) document.getElementById('rocketNumber').value = payment.rocket;
+        if (payment.bank) document.getElementById('bankDetails').value = payment.bank;
+        
+        const email = JSON.parse(localStorage.getItem('email_settings')) || {};
+        if (email.host) document.getElementById('smtpHost').value = email.host;
+        if (email.port) document.getElementById('smtpPort').value = email.port;
+        if (email.user) document.getElementById('smtpUser').value = email.user;
+        
+        const colors = JSON.parse(localStorage.getItem('appearance_settings')) || {};
+        if (colors.primary) document.getElementById('primaryColor').value = colors.primary;
+        if (colors.accent) document.getElementById('accentColor').value = colors.accent;
+        if (colors.background) document.getElementById('bgColor').value = colors.background;
+    }
+    
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+    
+    loadSettings();
+</script>
+</body>
+</html>
